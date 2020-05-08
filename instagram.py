@@ -6,16 +6,16 @@ from os.path import isfile, join
 from random import randint
 from InstagramAPI import InstagramAPI
 
-PhotoPath = "C:/Users/Matheus/Desktop/covid"
-IGUSER = "botcovidinstagram@gmail.com"
-PASSWD = "7iCbnGnCJeWXCP7"
+PhotoPath = "C:/Users/DinoPC/Desktop/covid"
+IGUSER = "user"
+PASSWD = "password"
 
 
 IGCaption = "#covid"
 os.chdir(PhotoPath)
 ListFiles = sorted([f for f in listdir(PhotoPath) if isfile(join(PhotoPath, f))])
 print(ListFiles)
-print("Total Photo in this folder:" + str(len(ListFiles)))
+print("Total Photo in this folder: " + str(len(ListFiles)))
 
 
 igapi = InstagramAPI(IGUSER, PASSWD)
