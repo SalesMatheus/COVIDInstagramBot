@@ -22,6 +22,6 @@ plt.ylabel('Total de casos')
 plt.title('Media de casos de COVID-19')
 
 plt.legend(['Casos no Brazil', 'Casos no mundo'])
-#plt.savefig('covidGrafico.png')
+plt.savefig("/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads/grafico.png")
 
 plt.show()
