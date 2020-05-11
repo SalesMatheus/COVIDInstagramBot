@@ -7,7 +7,7 @@ from random import randint
 from InstagramAPI import InstagramAPI
 
 PhotoPath = "C:/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads"
-IGUSER = "username"
+IGUSER = "user"
 PASSWD = "password"
 
 
@@ -27,8 +27,8 @@ for i, _ in enumerate(ListFiles):
     print("Progress: " + str([i + 1]) + " of " + str(len(ListFiles)))
     print("Now Uploading this photo to instagram: " + photo)
     igapi.uploadPhoto(photo, caption=IGCaption, upload_id=None)
-    os.remove(photo)
+
 
     n = randint(700,900)
     print("Sleep upload for seconds: " + str(n))
-    time.sleep(n)
+    #time.sleep(n)
