@@ -9,7 +9,7 @@ from grafico import generator
 
 bot = Bot()
 
-bot.login(username = "covidbot3", password = "aaabbb123")
+bot.login(username = "username", password = "password")
 
 while True:
     PhotoPath = r"C:\Users\Dinopc\PycharmProjects\COVIDBot\BotUploads"
@@ -41,21 +41,3 @@ while True:
             if c == len(ListFiles):
                 print("Uploads Finalizados! Aguardando por 24 horas para novas atualizações.")
                 time.sleep(86400)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
