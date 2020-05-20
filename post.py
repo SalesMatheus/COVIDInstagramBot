@@ -6,9 +6,9 @@ from os import listdir
 from os.path import isfile, join
 from random import randint
 from generator import generator
-import rootpath
+import os
 
-Path = rootpath.detect()
+Path = os.path.abspath(os.curdir)
 
 bot = Bot()
 

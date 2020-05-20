@@ -4,9 +4,9 @@ from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 import numpy as np
 from datetime import date
-import rootpath
+import os
 
-Path = rootpath.detect()
+Path = os.path.abspath(os.curdir)
 
 def generator ():
     # source -- Brazil
