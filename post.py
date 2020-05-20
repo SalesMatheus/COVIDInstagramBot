@@ -34,7 +34,7 @@ while True:
 
             if c < len(ListFiles):
                 # aguardar por 60 a 120s
-                n = randint(60, 120)
+                n = randint(10, 20)
                 print(f"Aguardando por : {n} segundos")
                 time.sleep(n)
 

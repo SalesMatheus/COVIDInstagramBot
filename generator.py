@@ -2,6 +2,7 @@ import json
 import requests
 from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
+import numpy as np
 from datetime import date
 
 def generator ():
@@ -11,13 +12,19 @@ def generator ():
     # source -- World
     response2 = requests.get("https://disease.sh/v2/all")
     stats2 = json.loads(response2.content)
-    # source -- Last30DaysBrazil
-    response3 = requests.get("https://disease.sh/v2/historical/brazil?lastdays=10")
-    stats3 = json.loads(response3.content)
+    # source -- South America
+    response3 = requests.get("https://disease.sh/v2/continents/South%20America?yesterday=false")
+    statsSA = json.loads(response3.content)
+
+    # SouthAmerica (getting)
+    activeSA = statsSA['active']
+    recoveredSA = statsSA['recovered']
+    deathsSA = statsSA['deaths']
 
 
     # BrazilCases (getting)
     cases = stats['cases']
+    active = stats['active']
     recovered = stats['recovered']
     deaths = stats['deaths']
 
@@ -28,7 +35,7 @@ def generator ():
 
     # Getting Date
     today = date.today()
-    d1 = today.strftime("%d.%m.%Y")
+    d1 = today.strftime("%d/%m/%Y")
 
     #Gráfico 1
     plt.figure(num=None, figsize=(5, 5), dpi=100, facecolor='w', edgecolor='k')
@@ -52,6 +59,46 @@ def generator ():
     plt.savefig("/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads/grafico.jpg")
 
     #plt.show()
+
+    #Gráfico de Barras
+    labels = ['América do Sul (Sem o Brasil)', 'Brasil']
+    ativos = [activeSA - active, active]
+    recuperados = [recoveredSA - recovered, recovered]
+    mortos = [deathsSA - deaths, deaths]
+
+    x = np.arange(len(labels))  # the label locations
+    width = 0.35  # the width of the bars
+
+    fig, ax = plt.subplots()
+    rects1 = ax.bar(x - width / 2, ativos, width, label='Casos Ativos')
+    rects2 = ax.bar(x + width / 2, recuperados, width, label='Recuperados')
+    rects3 = ax.bar(x + width / 2, mortos, width, label='Mortos')
+
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    ax.set_ylabel('Casos/Recuperados')
+    ax.set_title(f'COVID 19 - Situação no Continente - {d1}')
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.legend()
+
+    def autolabel(rects):
+        """Attach a text label above each bar in *rects*, displaying its height."""
+        for rect in rects:
+            height = rect.get_height()
+            ax.annotate('{}'.format(height),
+                        xy=(rect.get_x() + rect.get_width() / 2, height),
+                        xytext=(0, 3),  # 3 points vertical offset
+                        textcoords="offset points",
+                        ha='center', va='bottom')
+
+    autolabel(rects1)
+    autolabel(rects2)
+    autolabel(rects3)
+
+    fig.tight_layout()
+    plt.savefig("/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads/graficobarras.jpg")
+    #plt.show()
+
 
     ## Pillow (criando imagem) -- Dados do Brasil
     image = Image.open('/Users/DinoPC/PyCharmProjects/COVIDBot/Images/template.png')
@@ -81,5 +128,4 @@ def generator ():
     # Salvando a Imagem e convertendo
     rgb_im = image.convert('RGB')
     rgb_im.save("/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads/worlddata.jpg")
-
 
