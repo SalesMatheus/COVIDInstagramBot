@@ -5,7 +5,7 @@ import time
 from os import listdir
 from os.path import isfile, join
 from random import randint
-from grafico import generator
+from generator import generator
 
 bot = Bot()
 
