@@ -6,13 +6,16 @@ from os import listdir
 from os.path import isfile, join
 from random import randint
 from generator import generator
+import rootpath
+
+Path = rootpath.detect()
 
 bot = Bot()
 
-bot.login(username = "username", password = "password")
+bot.login(username = username, password = password)
 
 while True:
-    PhotoPath = r"C:\Users\Dinopc\PycharmProjects\COVIDBot\BotUploads"
+    PhotoPath = Path + "/BotUploads"
     IGCaption = "#programminglife #covid"
     os.chdir(PhotoPath)
     generator()
@@ -21,7 +24,6 @@ while True:
     print("Total de fotos na pasta: " + str(len(ListFiles)))
 
     c = 0
-
 
     for i, _ in enumerate(ListFiles):
 

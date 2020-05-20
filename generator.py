@@ -4,6 +4,9 @@ from PIL import Image, ImageDraw, ImageFont
 import matplotlib.pyplot as plt
 import numpy as np
 from datetime import date
+import rootpath
+
+Path = rootpath.detect()
 
 def generator ():
     # source -- Brazil
@@ -56,7 +59,7 @@ def generator ():
     plt.title('Media de casos de COVID-19')
 
     plt.legend(['Casos no Brasil', 'Casos no Mundo'])
-    plt.savefig("/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads/grafico.jpg")
+    plt.savefig(Path + "/BotUploads/grafico.jpg")
 
     #plt.show()
 
@@ -96,36 +99,34 @@ def generator ():
     autolabel(rects3)
 
     fig.tight_layout()
-    plt.savefig("/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads/graficobarras.jpg")
+    plt.savefig(Path + "/BotUploads/graficobarras.jpg")
     #plt.show()
 
 
     ## Pillow (criando imagem) -- Dados do Brasil
-    image = Image.open('/Users/DinoPC/PyCharmProjects/COVIDBot/Images/template.png')
-    font_type = ImageFont.truetype('arial.ttf', 23)
+    image = Image.open(Path + "/Template/brazildata-template.png")
+    font_type = ImageFont.truetype('ariblk.ttf', 50)
     draw = ImageDraw.Draw(image)
-    draw.text(xy=(100, 20), text=str(f'Casos no Brasil - {d1}'), fill=(255, 69, 0), font=font_type)
-    draw.text(xy=(200,110), text=str(f"{cases}"), fill=(255, 69, 0), font=font_type)
-    draw.text(xy=(200,200), text=str(recovered), fill=(255, 69, 0), font=font_type)
-    draw.text(xy=(200,280), text=str(f"{deaths}"), fill=(255, 69, 0), font=font_type)
+    draw.text(xy=(140,227), text=str(f"{cases}"), fill=(0, 0, 0), font=font_type)
+    draw.text(xy=(140,461), text=str(recovered), fill=(0, 0, 0), font=font_type)
+    draw.text(xy=(140,693), text=str(f"{deaths}"), fill=(0, 0, 0), font=font_type)
     #image.show()
 
     #Salvando a Imagem e convertendo
     rgb_im = image.convert('RGB')
-    rgb_im.save("/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads/brazildata.jpg")
+    rgb_im.save(Path + "/BotUploads/1-brazildata.jpg")
 
     ## Pillow (criando imagem) -- Dados do Mundo
-    image = Image.open('/Users/DinoPC/PyCharmProjects/COVIDBot/Images/template.png')
-    font_type = ImageFont.truetype('arial.ttf', 23)
+    image = Image.open(Path + "/Template/worlddata-template.png")
+    font_type = ImageFont.truetype('ariblk.ttf', 50)
     draw = ImageDraw.Draw(image)
-    draw.text(xy=(100, 20), text=str(f'Casos no Mundo - {d1}'), fill=(255, 69, 0), font=font_type)
-    draw.text(xy=(200, 110), text=str(f"{casesW}"), fill=(255, 69, 0), font=font_type)
-    draw.text(xy=(200, 200), text=str(recoveredW), fill=(255, 69, 0), font=font_type)
-    draw.text(xy=(200, 280), text=str(f"{deathsW}"), fill=(255, 69, 0), font=font_type)
+    draw.text(xy=(140,227), text=str(f"{casesW}"), fill=(0, 0, 0), font=font_type)
+    draw.text(xy=(140,461), text=str(recoveredW), fill=(0, 0, 0), font=font_type)
+    draw.text(xy=(140,693), text=str(f"{deathsW}"), fill=(0, 0, 0), font=font_type)
     #image.show()
 
 
     # Salvando a Imagem e convertendo
     rgb_im = image.convert('RGB')
-    rgb_im.save("/Users/DinoPC/PyCharmProjects/COVIDBot/BotUploads/worlddata.jpg")
+    rgb_im.save(Path + "/BotUploads/2-worlddata.jpg")
 
